@@ -11,8 +11,6 @@
           </div>
           <div class="portfolio-info">
             <h4 id="portfolioTitle">
-            <div id="attentionBtn" style="display: none; cursor: pointer; float: right;">
-			</div>
             </h4>
             <ul>
               <li><strong>전 공</strong>: <span id="major"></span></li>
@@ -22,10 +20,11 @@
             </ul>
             <div style="float: right;">
 	            <button id="updateBtn" type="button" class="btn btn-outline-secondary btn-sm" style="display: none;">글 수정</button>
+	            <button id="convertPdfBtn" type="button" class="btn btn-outline-success btn-sm" style="display: none;">PDF 변환</button>
             </div>
           </div>
         </div>
-        <div class="portfolio-description">
+        <div id="pdfSection" class="portfolio-description">
           <h2 id="title"></h2>
           <p id="post_header">
           </p>
@@ -35,13 +34,15 @@
         </div>
         <hr>
         <br>
-        <h4><strong>조언글</strong></h4>
+        <h4><strong>조언글</strong><div style="font-size: 15px; float: right;"><span id="totalElement"></span> 건의 조언이 존재합니다.</div></h4>
         <div>
-        	<div class="media p-3" id="reviewList">
+        	<div class="media p-3">
+        		<div class="media-body" id="reviewList">
+        		</div>
         	</div>
         </div>
         <hr>
-        <div class="form-group">
+        <div class="form-group" id="reviewWriteSection">
 		  <textarea class="form-control" rows="5" id="reviewContent" placeholder="여러분의 소중한 의견을 남겨주세요."></textarea>
 		  <button class="btn btn-primary" style="margin-top: 5px; float: right;" data-toggle="modal" data-target="#registerReviewModal">조언글 등록</button>
 		</div>
@@ -58,6 +59,68 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" id="registerReviewBtn">예</button>
           <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">아니요</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="updateReviewModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          	정말 작성한 조언을 수정하시겠습니까?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" id="updateReviewBtn">예</button>
+          <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">아니요</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="deleteReviewModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          	정말 작성한 조언을 삭제하시겠습니까?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" id="deleteReviewBtn">예</button>
+          <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">아니요</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="registerReviewSuccessModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+			소중한 의견 감사합니다! 조언이 정상적으로 등록되었습니다.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">확 인</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="updateReviewSuccessModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+			조언이 정상적으로 수정되었습니다.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">확 인</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="deleteReviewSuccessModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+			조언이 정상적으로 삭제되었습니다.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">확 인</button>
         </div>
       </div>
     </div>

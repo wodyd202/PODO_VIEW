@@ -189,12 +189,24 @@ $("#type_5").click(function(){
 
 $("#portfolio_header").keyup(function(){
 	const length = $(this).val().trim().length;
-	$("#header_text_length").text("- 100 자 중 ( "+ length + " ) 자 작성");
+	if(length > 100){
+		$("#header_text_length").text("- 100 자 중 ( "+ length + " ) 자 작성");
+		$("#header_text_length").css('color','red');
+	}else{
+		$("#header_text_length").text("- 100 자 중 ( "+ length + " ) 자 작성");
+		$("#header_text_length").css('color','green');
+	}
 });
 
 $("#portfolio_title").keyup(function(){
 	const length = $(this).val().trim().length;
-	$("#title_text_length").text("- 100 자 중 ( "+ length + " ) 자 작성");
+	if(length > 100){
+		$("#title_text_length").text("- 100 자 중 ( "+ length + " ) 자 작성");
+		$("#title_text_length").css('color','red');
+	}else{
+		$("#title_text_length").text("- 100 자 중 ( "+ length + " ) 자 작성");
+		$("#title_text_length").css('color','green');
+	}
 });
 
 $("#resetBtn").click(()=>{

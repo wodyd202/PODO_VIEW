@@ -16,11 +16,11 @@
 	  	<div class="form-group">
 			<label>포트폴리오 내 용 <span id="content_text_length"></span></label>
 			<br>
-		 	<button class="btn btn-sm btn-primary" style="font-size: 13px;" id="type_1">이력서 양식</button>
-            <button class="btn btn-sm btn-primary" style="font-size: 13px;" id="type_2">간단 자기소개 양식</button>
-            <button class="btn btn-sm btn-primary" style="font-size: 13px;" id="type_3">basic_1</button>
-            <button class="btn btn-sm btn-primary" style="font-size: 13px;" id="type_4">basic_2</button>
-            <button class="btn btn-sm btn-primary" style="font-size: 13px;" id="type_5">basic_3</button>
+		 	<button class="btn btn-sm btn-info" style="font-size: 13px;" id="type_1">이력서 양식</button>
+            <button class="btn btn-sm btn-info" style="font-size: 13px;" id="type_2">간단 자기소개 양식</button>
+            <button class="btn btn-sm btn-info" style="font-size: 13px;" id="type_3">basic_1</button>
+            <button class="btn btn-sm btn-info" style="font-size: 13px;" id="type_4">basic_2</button>
+            <button class="btn btn-sm btn-info" style="font-size: 13px;" id="type_5">basic_3</button>
             <br><br>
 			<div id="summernote" class="d-none d-lg-flex align-items-end fixed-top topbar-transparent"></div>
 			<div class="validate" id="content_validation"></div>
@@ -88,6 +88,18 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" id="portfolioUpdateSuccessBtn">확 인</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="portfolioDeleteSuccessModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+			포트폴리오가 정상적으로  삭제되었습니다.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" id="portfolioDeleteSuccessBtn">확 인</button>
         </div>
       </div>
     </div>

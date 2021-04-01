@@ -15,6 +15,20 @@ findByIdPortfolio('',seq,
 	$("#portfolioNotFoundModal").modal();
 });
 
+$("#deleteBtn").click(()=>{
+	const portfolio = {
+		id : seq
+	}
+	portfolioDelete(portfolio,(sucecess)=>{
+		$("#portfolioDeleteSuccessModal").modal();
+	},(error)=>{
+	});
+});
+
+$("#portfolioDeleteSuccessBtn").click(()=>{
+	location.href = './index';
+});
+
 $("#updateConfirmBtn").click(()=>{
 	const portfolio_title = $("#portfolio_title").val().trim();
 	const portfolio_header = $("#portfolio_header").val().trim();
