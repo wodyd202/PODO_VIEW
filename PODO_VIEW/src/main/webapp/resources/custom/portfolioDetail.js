@@ -5,19 +5,20 @@ let page = 0;
 let focusUpdateReviewBtn = null;
 
 findAttentionList();
+getInterest();
 
 findByIdPortfolio('',seq,
 (success)=>{
 	const email = localStorage.getItem('email');
-
 	$("#major").text(success['major']);
 	$("#writer").text(success['writer']);
-	$("#createDate").text(success['createDate']);
+	$("#createDate").text(formatDate(success['createDate']));
 	$("#portfolioTitle").text(success['title']);
 	$("#post_header").text(success['header']);
 	$("#post_section").html(success['content']);
 	
 	if(email === success['writer']){
+		$("#interestRegisterBtn").hide();
 		$("#updateBtn").show();
 		$("#reviewWriteSection").hide();
 		$("#convertPdfBtn").show();
@@ -40,6 +41,24 @@ $(window).scroll(function() {
     	page++;
     	findAttentionList();
     }
+});
+
+$("#interestRegisterBtn").click(()=>{
+	registerInterest({
+		portfolioId : seq
+	},(success)=>{
+		getInterest();
+	},(error)=>{
+	});
+});
+
+$("#interestDeleteBtn").click(()=>{
+	deleteInterest({
+		portfolioId : seq
+	},(success)=>{
+		getInterest();
+	},(error)=>{
+	});
 });
 
 $("#deleteReviewBtn").click(()=>{
@@ -121,6 +140,23 @@ $('#convertPdfBtn').click(function() {
   });
 });
 
+function getInterest(){
+	findInterest({
+		portfolioId : seq
+	},(success)=>{
+		if(success === ''){
+			$("#interestRegisterBtn").show();
+			$("#interestDeleteBtn").hide();
+		}else{
+			$("#interestRegisterBtn").hide();
+			$("#interestDeleteBtn").show();
+		}
+	},(error)=>{
+		$("#interestRegisterBtn").hide();
+		$("#interestDeleteBtn").hide();
+	});
+}
+
 function findAttentionList(){
 	findAllAttention({
 		portfolioId : seq,
@@ -135,7 +171,7 @@ function findAttentionList(){
 			innerHtml += `
 			<div>
 				<input type="hidden" value="${val['id']}">
-				<h5>${val['writer']} <small><i>${val['createDate']}</i></small>
+				<h5>${val['writer']} <small><i>${formatDate(val['createDate'])}</i></small>
 				<button id="${((page + 1) * 10) + idx}_addReviewBtn" onclick="showReviewArea(${((page + 1) * 10) + idx})" class="btn btn-small" style="margin-left:20px;">답글</button>
 				<button onclick="hideReviewArea()" id="${((page + 1) * 10) + idx}_cencel" class="btn btn-small" style="display:none;">취소</button>
 				<button onclick="showUpdateReview(${((page + 1) * 10) + idx},'${val['content']}')" class="btn btn-small" style="margin-left:0px;">수정</button>

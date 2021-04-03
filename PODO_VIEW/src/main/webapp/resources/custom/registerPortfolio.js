@@ -262,7 +262,7 @@ function getTemporaryPortfolio(){
 		let innerHtml = ``;
 		temporaryPortfolioList = success;
 		temporaryPortfolioList.map((val)=>{
-			innerHtml += `<option value='${val['id']}'>${val['title']} [${val['createDate']}]<input type="text"></option>`;
+			innerHtml += `<option value='${val['id']}'>${val['title']} [${formatDate(val['createDate'])}]<input type="text"></option>`;
 		});
 		if(innerHtml === ''){
 			innerHtml = '<option value="">임시 저장 글이 존재하지 않습니다.</option>';

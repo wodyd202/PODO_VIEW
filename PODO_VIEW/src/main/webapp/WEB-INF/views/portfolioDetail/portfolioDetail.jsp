@@ -12,6 +12,14 @@
           <div class="portfolio-info">
             <h4 id="portfolioTitle">
             </h4>
+            <div style="float: right;">
+				<button class="btn btn-outline-primary btn-sm" id="interestRegisterBtn" style="display: none;">
+					관심 주기
+				</button>
+				<button class="btn btn-outline-danger btn-sm" id="interestDeleteBtn" style="display: none;">
+					관심 주기 해제
+				</button>
+            </div>
             <ul>
               <li><strong>전 공</strong>: <span id="major"></span></li>
               <li><strong>작성자</strong>: <span id="writer"></span></li>
