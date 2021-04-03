@@ -9,5 +9,7 @@
   <%@include file="./common/footer.jsp" %>
   <%@include file="./common/top-button.jsp"%>
   <%@include file="./common/script.jsp" %>
+  <script src="./api/portfolioAPI.js"></script>
+  <script src="./custom/my-portfolio.js"></script>
 </body>
 </html>

@@ -24,8 +24,8 @@
               <li><strong>전 공</strong>: <span id="major"></span></li>
               <li><strong>작성자</strong>: <span id="writer"></span></li>
               <li><strong>작성일</strong>: <span id="createDate"></span></li>
-              <li><strong>관심도</strong>: 0</li>
             </ul>
+            <hr>
             <div style="float: right;">
 	            <button id="updateBtn" type="button" class="btn btn-outline-secondary btn-sm" style="display: none;">글 수정</button>
 	            <button id="convertPdfBtn" type="button" class="btn btn-outline-success btn-sm" style="display: none;">PDF 변환</button>
