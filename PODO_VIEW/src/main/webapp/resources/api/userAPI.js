@@ -1,5 +1,18 @@
 const USER_API_URL = "http://localhost:8081/api/v1/user";
 
+function countAllUser(callback,errorCallback){
+	$.ajax({
+		url : USER_API_URL + "/count",
+		method : "GET",
+		success : function(res){
+			callback(res);
+		},
+		error : function(res){
+			errorCallback(res);
+		}
+	})
+}
+
 function registerUser(user, callback, errorCallback){
 	$.ajax({
 		url : USER_API_URL,

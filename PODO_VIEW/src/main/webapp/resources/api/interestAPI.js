@@ -1,5 +1,18 @@
 const INTEREST_API_URL = "http://localhost:8081/api/v1/interest";
 
+function countAllInterest(callback,errorCallback){
+	$.ajax({
+		url : INTEREST_API_URL + "/count",
+		method : "GET",
+		success : function(res){
+			callback(res);
+		},
+		error : function(res){
+			errorCallback(res);
+		}
+	})
+}
+
 function findInterest(search,callback,errorCallback){
 	const token = localStorage.getItem('access_token');
 	$.ajax({

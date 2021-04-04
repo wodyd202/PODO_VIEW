@@ -1,5 +1,18 @@
 const PORTFOLIO_API_URL = "http://localhost:8081/api/v1/portfolio";
 
+function countAllPortfolio(callback,errorCallback){
+	$.ajax({
+		url : PORTFOLIO_API_URL + "/count",
+		method : "GET",
+		success : function(res){
+			callback(res);
+		},
+		error : function(res){
+			errorCallback(res);
+		}
+	})
+}
+
 function portfolioDelete(portfolio,callback,errorCallback){
 	refreshToken(function(){
 		const token = localStorage.getItem('access_token');

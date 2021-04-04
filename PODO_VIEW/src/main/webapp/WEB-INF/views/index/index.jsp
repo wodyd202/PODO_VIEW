@@ -159,15 +159,15 @@
 		<div class="container">
 			<div class="row counters" data-aos="fade-up" data-aos-delay="100">
 				<div class="col-lg-4 col-4 text-center">
-					<span data-toggle="counter-up">274</span>
+					<span data-toggle="counter-up" id="portfolioCount"></span>
 					<p>포트폴리오</p>
 				</div>
 				<div class="col-lg-4 col-4 text-center">
-					<span data-toggle="counter-up">421</span>
+					<span data-toggle="counter-up" id="userCount"></span>
 					<p>사용자</p>
 				</div>
 				<div class="col-lg-4 col-4 text-center">
-					<span data-toggle="counter-up">1,364</span>
+					<span data-toggle="counter-up" id="interestCount"></span>
 					<p>관심 포트폴리오</p>
 				</div>
 			</div>
