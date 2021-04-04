@@ -1,15 +1,21 @@
+const email = localStorage.getItem('email');
 const seq = get_query()['seq'];
 let reviewAddFlag = false;
 let totalPage = 0;
 let page = 0;
 let focusUpdateReviewBtn = null;
+let focusCencelBtn = null;
+let selectContent = null;
+let selectAttentionId = null;
+let updateReAttentionIdx = null;
+let deleteReAttentionIdx = null;
+let updateReAttentionTarget = null;
 
 findAttentionList();
 getInterest();
 
 findByIdPortfolio('',seq,
 (success)=>{
-	const email = localStorage.getItem('email');
 	$("#major").text(success['major']);
 	$("#writer").text(success['writer']);
 	$("#createDate").text(formatDate(success['createDate']));
@@ -41,6 +47,48 @@ $(window).scroll(function() {
     	page++;
     	findAttentionList();
     }
+});
+
+$("#deleteReAttentionBtn").click(()=>{
+	const reAttention = {
+		reAttentionId : deleteReAttentionIdx
+	};
+	deleteReAttention(reAttention,(success)=>{
+		$("#deleteReAttentionSuccessModal").modal();
+	},(error)=>{
+	});
+});
+
+$("#updateReAttentionBtn").click(()=>{
+	const reAttention = {
+		reAttentionId : updateReAttentionIdx,
+		content : $("#updateReAttentionContent").val().trim()
+	};
+	updateReAttention(reAttention,(success)=>{
+		updateReAttentionTarget.innerText = $("#updateReAttentionContent").val().trim();
+		$("#updateReAttentionSuccessModal").modal();
+		$("#updateReAttentionContent").val('');
+	},(error)=>{
+		$("#updateReAttentionErrorContent").text(error['responseJSON']['msg']);
+		$("#updateReAttentionErrorModal").modal();
+	});
+});
+
+$("#registerReAttentionBtn").click(()=>{
+	const reAttention = {
+		attentionId : selectAttentionId,
+		content : selectContent.value.trim()
+	};
+	registerReAttention(reAttention,(success)=>{
+		selectContent.nextSibling.nextSibling.style.display='none';
+		selectContent.value = "";
+		$("#registerReAttentionSuccessModal").modal();
+		focusCencelBtn.click();
+		$("#" + nowReviewAddIdx + "_showReAttention")[0].click();
+	},(error)=>{
+		selectContent.nextSibling.nextSibling.innerText=error['responseJSON']['msg'];
+		selectContent.nextSibling.nextSibling.style.color='red';
+	});
 });
 
 $("#interestRegisterBtn").click(()=>{
@@ -168,27 +216,115 @@ function findAttentionList(){
 		$("#totalElement").text(success['totalElement']);
 		let innerHtml = ``;
 		content.map((val,idx)=>{
-			innerHtml += `
-			<div>
-				<input type="hidden" value="${val['id']}">
-				<h5>${val['writer']} <small><i>${formatDate(val['createDate'])}</i></small>
-				<button id="${((page + 1) * 10) + idx}_addReviewBtn" onclick="showReviewArea(${((page + 1) * 10) + idx})" class="btn btn-small" style="margin-left:20px;">답글</button>
-				<button onclick="hideReviewArea()" id="${((page + 1) * 10) + idx}_cencel" class="btn btn-small" style="display:none;">취소</button>
-				<button onclick="showUpdateReview(${((page + 1) * 10) + idx},'${val['content']}')" class="btn btn-small" style="margin-left:0px;">수정</button>
-				<button id="${((page + 1) * 10) + idx}_updateCencelBtn" onclick="hideUpdateReview(${((page + 1) * 10) + idx})" class="btn btn-small" style="margin-left:0px; display:none;">수정 취소</button>
-				</h5>
-				<p id="${((page + 1) * 10) + idx}_reviewContent">${val['content']}</p>
-				<div id="${((page + 1) * 10) + idx}_update" style="display:none;">
+			if(email === val['writer']){
+				innerHtml += `
+					<div>
+					<input type="hidden" value="${val['id']}">
+					<h5>${val['writer']} <small><i>${formatDate(val['createDate'])}</i></small>
+					<button id="${((page + 1) * 10) + idx}_addReviewBtn" onclick="showReviewArea(${((page + 1) * 10) + idx})" class="btn btn-small" style="margin-left:20px;">답글 작성</button>
+					<button class="btn btn-small" style="margin-left:5px;" onclick="showReAttentionList('${((page + 1) * 10) + idx}')" id="${((page + 1) * 10) + idx}_showReAttention">답글 보기</button>
+					<button onclick="hideReviewArea()" id="${((page + 1) * 10) + idx}_cencel" class="btn btn-small" style="display:none;">취소</button>
+					<button onclick="showUpdateReview(${((page + 1) * 10) + idx},'${val['content']}')" class="btn btn-small" style="margin-left:0px;">수정</button>
+					<button id="${((page + 1) * 10) + idx}_updateCencelBtn" onclick="hideUpdateReview(${((page + 1) * 10) + idx})" class="btn btn-small" style="margin-left:0px; display:none;">수정 취소</button>
+					</h5>
+					<p id="${((page + 1) * 10) + idx}_reviewContent">${val['content']}</p>
+					<div id="${((page + 1) * 10) + idx}_update" style="display:none;">
 					<textarea class="form-control" rows="2" placeholder="답글을 작성해주세요."></textarea>
-				</div>
-				<br>
-				<hr>
-			</div>
-				`;
+					<div class="validate"></div>
+					<div style="float:right; margin-top:3px;">
+					<button class="btn btn-sm btn-primary" onclick="showRegisterReAttentionModal()">답글 작성</button>
+					</div>
+					</div>
+					<div id="${((page + 1) * 10) + idx}_reAttentionList">
+					</div>
+					<br>
+					<hr>
+					</div>
+					`;
+			}else{
+				innerHtml += `
+					<div>
+					<input type="hidden" value="${val['id']}">
+					<h5>${val['writer']} <small><i>${formatDate(val['createDate'])}</i></small>
+					<button id="${((page + 1) * 10) + idx}_addReviewBtn" onclick="showReviewArea(${((page + 1) * 10) + idx})" class="btn btn-small" style="margin-left:20px;">답글 작성</button>
+					<button class="btn btn-small" style="margin-left:5px;" onclick="showReAttentionList('${((page + 1) * 10) + idx}')" id="${((page + 1) * 10) + idx}_showReAttention">답글 보기</button>
+					<button onclick="hideReviewArea()" id="${((page + 1) * 10) + idx}_cencel" class="btn btn-small" style="display:none;">취소</button>
+					<button id="${((page + 1) * 10) + idx}_updateCencelBtn" onclick="hideUpdateReview(${((page + 1) * 10) + idx})" class="btn btn-small" style="margin-left:0px; display:none;">수정 취소</button>
+					</h5>
+					<p id="${((page + 1) * 10) + idx}_reviewContent">${val['content']}</p>
+					<div id="${((page + 1) * 10) + idx}_update" style="display:none;">
+					<textarea class="form-control" rows="2" placeholder="답글을 작성해주세요."></textarea>
+					<div class="validate"></div>
+					<div style="float:right; margin-top:3px;">
+					<button class="btn btn-sm btn-primary" onclick="showRegisterReAttentionModal()">답글 작성</button>
+					</div>
+					</div>
+					<div id="${((page + 1) * 10) + idx}_reAttentionList">
+					</div>
+					<br>
+					<hr>
+					</div>
+					`;
+			}
 		});
 		$("#reviewList").html($("#reviewList").html() + innerHtml);
 	},(error)=>{
 	});
+}
+
+function showReAttentionList(idx){
+	const attentionId = event.target.parentNode.parentNode.firstChild.nextSibling.value;
+	const search = {
+		attentionId : attentionId,
+		page : 0,
+		size : 100
+	};
+	findAllReAttention(search,(success)=>{
+		let innerHtml = ``;
+		success['content'].map((val)=>{
+			if(email === val['writer']){
+				innerHtml += `
+					<div class="media p-5">
+					<div class="media-body">
+					<h5>${val['writer']}<small><i>${formatDate(val['createDate'])}</i></small></h5>
+					<p>${val['content']}</p>
+					<input type="hidden" value="${val['id']}">
+					<button class="btn btn-sm" onclick="showReAttentionUpdateModal()">수정</button>
+					<button class="btn btn-sm" onclick="showReAttentionDeleteModal()">삭제</button>
+					</div>
+					</div> 
+					`;
+			}else{
+				innerHtml += `
+					<div class="media p-5">
+					<div class="media-body">
+					<h5>${val['writer']}<small><i>${formatDate(val['createDate'])}</i></small></h5>
+					<p>${val['content']}</p>
+					</div>
+					</div> 
+				`;
+			}
+		});
+		$("#" + idx + "_reAttentionList").html(innerHtml);
+	},(error)=>{
+	});
+}
+
+function showReAttentionDeleteModal(){
+	deleteReAttentionIdx = event.target.parentNode.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.value;
+	$("#deleteReAttentionModal").modal();
+}
+
+function showReAttentionUpdateModal(){
+	updateReAttentionIdx = event.target.parentNode.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.value;
+	updateReAttentionTarget = event.target.parentNode.firstChild.nextSibling.nextSibling.nextSibling;
+	$("#updateReAttentionModal").modal();
+}
+
+function showRegisterReAttentionModal(){
+	selectContent = event.target.parentNode.parentNode.firstChild.nextSibling;
+	selectAttentionId = event.target.parentNode.parentNode.parentNode.firstChild.nextSibling.value;
+	$("#registerReAttentionModal").modal();
 }
 
 function showReviewArea(seq){
@@ -199,13 +335,13 @@ function showReviewArea(seq){
 	nowReviewAddIdx = seq;
 	$("#"+ seq + "_update").show();
 	$("#"+ seq + "_cencel").show();
+	focusCencelBtn = $("#"+ seq + "_cencel");
 	reviewAddFlag = true;
 }
 
 function hideReviewArea(){
 	$("#"+ nowReviewAddIdx + "_update").hide();
 	$("#"+ nowReviewAddIdx + "_cencel").hide();
-	nowReviewAddIdx = null;
 	reviewAddFlag = false;
 }
 

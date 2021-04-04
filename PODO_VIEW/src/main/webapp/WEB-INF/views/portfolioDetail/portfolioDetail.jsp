@@ -97,6 +97,81 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="registerReAttentionModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+			정말 해당 조언에 답글을 등록하시겠습니까?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" id="registerReAttentionBtn">예</button>
+          <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">아니요</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="updateReAttentionModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+			<label for="usr">해당 조언을 수정합니다 :</label>
+  			<input type="text" class="form-control" id="updateReAttentionContent">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" id="updateReAttentionBtn">수 정</button>
+          <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">취 소</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="deleteReAttentionModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+			조언 답글 삭제시 복구가 불가능합니다. 정말 해당 조언 답글을 삭제하시겠습니까?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" id="deleteReAttentionBtn">예</button>
+          <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">아니요</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="updateReAttentionErrorModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body" id="updateReAttentionErrorContent">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">확 인</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="updateReAttentionSuccessModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+        	조언 답글 수정이 정상적으로 완료 되었습니다.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">확 인</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="registerReAttentionSuccessModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+			소중한 의견 감사합니다! 조언 답글이 정상적으로 등록되었습니다.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">확 인</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="modal fade" id="registerReviewSuccessModal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -117,6 +192,18 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">확 인</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="deleteReAttentionSuccessModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+			조언 답글이 정상적으로 삭제되었습니다.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" onclick="location.reload()">확 인</button>
         </div>
       </div>
     </div>

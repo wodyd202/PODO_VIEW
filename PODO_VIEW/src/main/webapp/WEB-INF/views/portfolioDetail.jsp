@@ -13,6 +13,7 @@
   <script type = "text/javascript" src = "https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script src="./api/interestAPI.js"></script>
   <script src="./api/portfolioAPI.js"></script>
+  <script src="./api/reAttentionAPI.js"></script>
   <script src="./api/attentionAPI.js"></script>
   <script src="./custom/portfolioDetail.js"></script>
 </body>
