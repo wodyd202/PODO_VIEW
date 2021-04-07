@@ -38,7 +38,15 @@
              <li><a href="javascript:moveMyPortfolio()">나의 포트폴리오</a></li>
            </ul>
          </li>
-         <li><input type="text" class="form-control form-control-sm" style="margin-top: 5px;" placeholder="  Search..."></li>
+         <li>
+         	<input type="text" class="form-control form-control-sm" style="margin-top: 5px;" placeholder="  Search..." id="searchTxt">
+         	<div style="max-width: 50px;">
+         		<table class="table table-hover" style="background-color: white;">
+			    <tbody id="searchResult">
+			    </tbody>
+  				</table>
+         	</div>		
+       	 </li>
          <li id="menu_login"><a href="./login">로그인</a></li>
          <li id="menu_logout"><a href="javascript:logout()">로그아웃</a></li>
          <li id="menu_mypage"><a href="">마이페이지</a></li>

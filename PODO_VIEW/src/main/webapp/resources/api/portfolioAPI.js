@@ -108,6 +108,24 @@ function findAllPortfolio(url,searchDTO, callback, errorCallback){
 	}
 }
 
+function searchPortfolio(search,callback,errorCallback){
+	const token = localStorage.getItem('access_token');
+	$.ajax({
+		url : PORTFOLIO_API_URL + "/search",
+		method : "GET",
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("Authorization", "Bearer " + token);
+		},
+		data : search,
+		success : function(res){
+			callback(res);
+		},
+		error : function(res){
+			errorCallback(res);
+		}
+	})
+}
+
 function findByIdPortfolio(url,id,callback,errorCallback){
 	const token = localStorage.getItem('access_token');
 	if(token === 'undefined' || token === undefined || token === null){

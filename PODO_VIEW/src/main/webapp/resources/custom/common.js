@@ -1,17 +1,44 @@
 isLogin();
 
+$("#searchTxt").keyup(()=>{
+	const input = $("#searchTxt").val().trim();
+	if(input === ''){
+		$("#searchResult").html('');
+		return;
+	}
+	searchPortfolio({
+		keyword : input,
+		page : 0,
+		size : 10
+	},(success)=>{
+		success = success['content'];
+		let innerHtml = ``;
+		success.map(val=>{
+			innerHtml += `
+				<tr onclick="location.href='./portfolioDetail?seq=${val['id']}'" style="cursor:pointer;">
+					<td>${val['title']}</td>
+				</tr>
+			`;
+		});
+		$("#searchResult").html(innerHtml);
+	},(error)=>{
+	});
+});
+
 function isLogin(){
 	const token = localStorage.getItem('access_token');
 	if(token === null || token === 'undefined' || token === undefined){
 		$("#menu_login").show();
 		$("#menu_logout").hide();
 		$("#menu_mypage").hide();
+		$("#searchTxt").hide();
 	}else{
 		tokenCheck(token,(success)=>{
 		},(error)=>{
 			refreshToken((res)=>{
 			});
 		});
+		$("#searchTxt").show();
 		$("#menu_login").hide();
 		$("#menu_logout").show();
 		$("#menu_mypage").show();
