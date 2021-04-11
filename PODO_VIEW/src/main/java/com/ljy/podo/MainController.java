@@ -46,6 +46,11 @@ public class MainController {
 		return "today-portfolioList";
 	}
 
+	@GetMapping("recommand-portfolioList")
+	public String recommand_portfolioList() {
+		return "recommand-portfolioList";
+	}
+
 	@GetMapping("my-portfolioList")
 	public String my_portfolioList() {
 		return "my-portfolioList";

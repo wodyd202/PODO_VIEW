@@ -19,9 +19,6 @@
 		         <li><a href="javascript:moveRegisterPortfolio()">포트폴리오 등록</a></li>
 	       		<%
 	       	}
-	       	%>
-	         <li><a href="#">서비스</a></li>
-	       	<%
 	       	if(url.equals("today-portfolioList") || url.equals("my-portfolioList")){
 	       		%>
 	         <li class="drop-down active"><a href="./portfolioList">포트폴리오 광장</a>
@@ -34,7 +31,7 @@
 	       	%>
            <ul>
              <li><a href="./today-portfolioList">오늘 등록된 포트폴리오</a></li>
-             <li><a href="#">추천 포트폴리오</a></li>
+             <li><a href="./recommand-portfolioList">추천 포트폴리오</a></li>
              <li><a href="javascript:moveMyPortfolio()">나의 포트폴리오</a></li>
            </ul>
          </li>

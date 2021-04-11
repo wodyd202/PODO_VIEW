@@ -11,7 +11,6 @@ $("#searchTxt").keyup(()=>{
 		page : 0,
 		size : 10
 	},(success)=>{
-		success = success['content'];
 		let innerHtml = ``;
 		success.map(val=>{
 			innerHtml += `
